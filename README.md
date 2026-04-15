@@ -48,6 +48,8 @@ docs/
       functional-requirements-ga.md   # /func-req --milestone ga output
 ```
 
+> Note: `/jira-tickets` creates tickets directly in JIRA and writes issue keys back into the functional-requirements file.
+
 ## Prerequisites
 
 - [Claude Code](https://claude.ai/code) with skills support
