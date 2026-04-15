@@ -62,3 +62,5 @@ Create a JIRA Epic and Stories from a functional requirements doc using JIRA MCP
 - JIRA MCP must be configured and authenticated before running
 - If a story already has a JIRA key in the file, skip it (idempotent)
 - Do not create sub-tasks — only Stories under the Epic
+- If a story has no Acceptance Criteria, omit the checklist from its JIRA description
+- If a JIRA MCP call fails mid-run, stop and report the partial state (e.g., "Epic ALERT-42 created, 3 of 7 stories created"). Do not retry automatically — confirm the Epic key with the human before resuming
