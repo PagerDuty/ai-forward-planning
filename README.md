@@ -16,7 +16,8 @@ PM drops source doc in docs/projects/<name>/    or    no doc yet
                           for missing/weak sections. Challenges draft
                           (skip with --approved).
                                        │
-                                       │  PM sets status: approved
+                                       │  PM replies "approved"
+                                       │  → Claude sets status: approved
 ```
 
 ### Phase 2 — Codebase Analysis + Scope
@@ -25,26 +26,27 @@ PM drops source doc in docs/projects/<name>/    or    no doc yet
 /analyze   Codebase scan → fill sections 5-6 + propose EA/GA scope
            Appends Scope Proposal to prd.md
       │
-      ├─ Needs Discussion N=0: no meeting needed → run /tech-design directly
+      ├─ Needs Discussion N=0: reply "approved" → proceed to /tech-design
       │
-      └─ Needs Discussion N>0: PM + Eng Lead joint meeting (~20 min)
-              Resolve ⚡ items → move to EA or GA in prd.md
+      └─ Needs Discussion N>0: hold joint meeting (~20 min)
+              Resolve ⚡ items → reply "approved" → proceed to /tech-design
       │
       ▼
-/tech-design   Full architecture spec on finalized scope  [draft → approved]
+/tech-design   Full architecture spec on finalized scope
                (optional for UI-only features — /analyze will flag)
+                                       │
+                                       │  Eng Lead replies "approved"
+                                       │  → Claude sets status: approved
 ```
 
 ### Phase 3 — Functional Requirements
 
 ```
-/func-req   Generates EA first, then GA (reads EA for consistency check)
+/func-req   Generates EA first, then GA
             GA auto-skipped if no GA stories in Scope Proposal
-      │
-      │  Requires prd.md: status: approved + Scope Proposal with no ⚡ items
-      │         tech-design.md: status: approved
-      ▼
-Eng Lead reviews both files in one pass → status: approved
+                                       │
+                                       │  Eng Lead replies "approved"
+                                       │  → Claude sets status: approved on each file
 ```
 
 ### Phase 4 — JIRA Ticket Creation
@@ -73,12 +75,12 @@ Eng Lead opens board → starts coding
 > **Project switching:** The first command you run with `--project <name>` saves that name to `.current-project`. All subsequent commands in the same project can omit `--project`. To switch projects, run any command with a new `--project <name>`.
 
 1. PM drops their source doc (any `.md`) into `docs/projects/<name>/` and runs `/prd --project <name>`. Claude reads what's there, interviews only for gaps, and challenges the draft. Use `--approved` to skip the challenge.
-2. PM reviews the PRD and sets `status: approved` in `prd.md`.
-3. Eng Lead runs `/analyze --project <name>` — fills sections 5-6 with codebase context and appends Scope Proposal. If Needs Discussion N=0: run `/tech-design` directly. If N>0: hold a joint meeting (~20 min) to resolve ⚡ items.
-4. Eng Lead runs `/tech-design --project <name>` — full architecture spec on locked scope. *(Skip for UI-only features — `/analyze` will flag when no backend surfaces detected.)*
-5. Eng Lead sets `tech-design.md` to `status: approved`.
+2. PM replies **"approved"** → Claude sets `status: approved` in `prd.md` and prompts next step.
+3. Eng Lead runs `/analyze --project <name>` — fills sections 5-6 with codebase context and appends Scope Proposal. If N=0 ⚡ items: reply **"approved"** to proceed. If N>0: resolve ⚡ items in the Scope Proposal, then reply **"approved"**.
+4. Eng Lead runs `/tech-design --project <name>` — full architecture spec on locked scope. *(Skip for UI-only features — `/analyze` will flag.)*
+5. Eng Lead replies **"approved"** → Claude sets `status: approved` in `tech-design.md` and prompts next step.
 6. Run `/func-req --project <name>` — generates EA then GA sequentially (GA auto-skipped if no GA stories).
-7. Eng Lead reviews both functional requirements files, sets `status: approved` on each.
+7. Eng Lead replies **"approved"** → Claude sets `status: approved` on each functional requirements file and prompts next step.
 8. Run `/jira-tickets --project <name>` — creates Epic + Stories for EA then GA.
 9. Eng Lead opens the board → starts coding.
 
@@ -89,7 +91,7 @@ One status field, same three values across all files:
 | Value | Set by | Means |
 |-------|--------|-------|
 | `draft` | AI (automatic) | Generated. Not yet reviewed. |
-| `approved` | Human (manual) | Reviewed and signed off. Downstream skills can proceed. |
+| `approved` | Human (reply "approved") | Reviewed and signed off. Claude updates the file. Downstream skills can proceed. |
 | `done` | AI (automatic) | Terminal. JIRA tickets created. |
 
 `prd.md` only uses `draft` and `approved`. Scope readiness is determined by the Scope Proposal section contents (no ⚡ items = scope is resolved), not a separate status value.
