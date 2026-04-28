@@ -20,7 +20,7 @@ Two modes depending on where the PM is in the process.
 - `--file` — path to PM's existing PRD document (required with `--ingest`)
 - `--mocks` — Figma URL for design mocks (optional). Saved to `prd.md` frontmatter and used by all downstream skills.
 
-**Resolve project:** `--project <name>` → write to `.current-project`. Else read `.current-project`. Else derive from git branch (strip `feature/`, `fix/`, `feat/`, `bugfix/`, leading ticket numbers like `ENG-123-`). If resolved from context, confirm first. If unresolvable, stop.
+**Resolve project:** Use `--project <name>` if provided (writes to `.current-project`). Else read `.current-project`. If neither, stop: *"No project set. Run with `--project <name>` or set `.current-project`."*
 
 ---
 

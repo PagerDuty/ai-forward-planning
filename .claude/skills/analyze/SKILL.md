@@ -13,7 +13,7 @@ Fills engineering context and proposes EA/GA scope in one pass. Run after PM set
 /analyze --project <name>
 ```
 
-**Resolve project:** `--project <name>` → write to `.current-project`. Else read `.current-project`. Else derive from git branch (strip `feature/`, `fix/`, `feat/`, `bugfix/`, leading ticket numbers like `ENG-123-`). If resolved from context, confirm first. If unresolvable, stop.
+**Resolve project:** Use `--project <name>` if provided (writes to `.current-project`). Else read `.current-project`. If neither, stop: *"No project set. Run with `--project <name>` or set `.current-project`."*
 
 **Precondition:** `prd.md` must have `status: approved`.
 

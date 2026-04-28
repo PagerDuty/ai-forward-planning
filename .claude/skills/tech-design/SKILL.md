@@ -15,7 +15,7 @@ Generate a deep technical spec from an approved, scope-finalized PRD. Uses GitHu
 
 - `--project` — matches the folder under `docs/projects/`. **Optional if `.current-project` is set.**
 
-**Resolve project:** `--project <name>` → write to `.current-project`. Else read `.current-project`. Else derive from git branch (strip `feature/`, `fix/`, `feat/`, `bugfix/`, leading ticket numbers like `ENG-123-`). If resolved from context, confirm first. If unresolvable, stop.
+**Resolve project:** Use `--project <name>` if provided (writes to `.current-project`). Else read `.current-project`. If neither, stop: *"No project set. Run with `--project <name>` or set `.current-project`."*
 
 **Preconditions:**
 1. `prd.md` must have `status: approved` — if not, stop: *"PRD not approved. Set `status: approved` in prd.md before running tech design."*
