@@ -7,15 +7,16 @@ A set of Claude Code skills that take a PM's feature idea to JIRA tickets — re
 ### Phase 1 — PM Authoring
 
 ```
-PM has rough idea (no doc)     PM has written doc
-         │                              │
-         ▼                              ▼
-/prd --project <name>     /prd --ingest --project <name> --file <path>
-         │                              │
-         │  Built-in challenge step after drafting
-         └──────────────┬───────────────┘
-                        │
-                        │  PM sets status: approved
+PM drops source doc in docs/projects/<name>/    or    no doc yet
+                        │                                   │
+                        └──────────────┬────────────────────┘
+                                       ▼
+                          /prd --project <name>
+                          Auto-discovers source doc. Interviews only
+                          for missing/weak sections. Challenges draft
+                          (skip with --approved).
+                                       │
+                                       │  PM sets status: approved
 ```
 
 ### Phase 2 — Codebase Analysis + Scope
@@ -61,8 +62,7 @@ Eng Lead opens board → starts coding
 
 | Skill | Command | Purpose | Who runs it |
 |-------|---------|---------|-------------|
-| PRD Interview | `/prd --project <name>` | Interview PM to draft PRD; built-in challenge step | PM |
-| PRD Ingest | `/prd --ingest --project <name> --file <path>` | Restructure PM's existing doc; built-in challenge step | PM |
+| PRD | `/prd --project <name>` | Auto-discovers source doc in project folder. Interviews only for missing sections. Challenges draft (skip with `--approved`). | PM |
 | Analyze | `/analyze --project <name>` | Codebase scan → fill sections 5-6 + EA/GA scope proposal | Eng Lead (after status: approved) |
 | Tech Design | `/tech-design --project <name>` | Full architecture spec on finalized scope (API, DB, infra) | Eng Lead (after scope resolved) |
 | Func Req | `/func-req --project <name>` | Generate EA + GA epics + stories sequentially | Eng Lead |
@@ -72,7 +72,7 @@ Eng Lead opens board → starts coding
 
 > **Project switching:** The first command you run with `--project <name>` saves that name to `.current-project`. All subsequent commands in the same project can omit `--project`. To switch projects, run any command with a new `--project <name>`.
 
-1. PM describes the feature — run `/prd --project <name>` (interview) or `/prd --ingest --project <name> --file <path>`. Claude challenges the draft before writing.
+1. PM drops their source doc (any `.md`) into `docs/projects/<name>/` and runs `/prd --project <name>`. Claude reads what's there, interviews only for gaps, and challenges the draft. Use `--approved` to skip the challenge.
 2. PM reviews the PRD and sets `status: approved` in `prd.md`.
 3. Eng Lead runs `/analyze --project <name>` — fills sections 5-6 with codebase context and appends Scope Proposal. If Needs Discussion N=0: run `/tech-design` directly. If N>0: hold a joint meeting (~20 min) to resolve ⚡ items.
 4. Eng Lead runs `/tech-design --project <name>` — full architecture spec on locked scope. *(Skip for UI-only features — `/analyze` will flag when no backend surfaces detected.)*
