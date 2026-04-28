@@ -124,15 +124,11 @@ Needs discussion: <N> items
 
 **UI-only check:** If all affected surfaces are UI/frontend-only (no API, DB, backend workers, or external service changes), add: *"Affected surfaces appear UI-only. You may be able to skip `/tech-design` — `/func-req` will confirm and offer a UX-only path."*
 
-**If N=0:**
 > "Analysis complete. Sections 5-6 filled and Scope Proposal appended to `docs/projects/<name>/prd.md`.
 >
-> All stories have clear signals — no meeting needed. Review the Scope Proposal and reply **approved** when ready."
-
-**If N>0:**
-> "Analysis complete. Sections 5-6 filled and Scope Proposal appended to `docs/projects/<name>/prd.md`.
+> *(N=0)* All stories have clear signals — no meeting needed. Review and reply **approved**.
 >
-> <N> stories need a scope decision — each has an EA case, GA case, and recommendation. Hold a quick joint meeting (~20 min) to resolve them. Move each ⚡ item to ✅ EA or ⏩ GA in the Scope Proposal, then reply **approved**."
+> *(N>0)* <N> stories need a scope decision — each has an EA case, GA case, and recommendation. Hold a quick joint meeting (~20 min), move each ⚡ item to ✅ EA or ⏩ GA, then reply **approved**."
 
 If the user replies with approval language ("approved", "lgtm", "looks good", "done", etc.):
 1. Verify no ⚡ items remain in the Scope Proposal — if any remain, stop and ask the user to resolve them first.

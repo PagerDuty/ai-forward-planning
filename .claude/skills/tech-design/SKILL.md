@@ -30,11 +30,7 @@ Generate a deep technical spec from an approved PRD with a finalized Scope Propo
 
 Read before doing anything else:
 
-1. `docs/projects/<name>/prd.md` — full context: problem statement, goals, non-goals, user stories, affected surfaces (section 5, which includes repos and any Design Mocks Summary written by `/analyze`), dependencies & constraints (section 6), and the Scope Proposal section.
-
-Use section 5 to determine which repos to scan and as entry points for the deeper scan — `/analyze` already identified these. If a Design Mocks Summary is present in section 5, use it to ground API contracts and component design. The Scope Proposal section provides the approved EA/GA cut. The scan here goes deeper, not wider.
-
-If any surface in section 5 has "Repo unknown — manual identification required", ask the eng lead to provide the repo before scanning that surface.
+1. `docs/projects/<name>/prd.md` — section 5 has repos and any Design Mocks Summary (use to ground API contracts and component design); section 6 has constraints; Scope Proposal defines the EA/GA cut. Scan goes deeper than `/analyze`, not wider. If any repo in section 5 is marked "Repo unknown", ask before scanning that surface.
 
 ### Step 2: Scan repos with GitHub MCP
 

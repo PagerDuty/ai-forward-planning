@@ -16,8 +16,7 @@ PM drops source doc in docs/projects/<name>/    or    no doc yet
                           for missing/weak sections. Challenges draft
                           (skip with --approved).
                                        │
-                                       │  PM replies "approved"
-                                       │  → Claude sets status: approved
+                                       │  reply "approved" → Claude sets status
 ```
 
 ### Phase 2 — Codebase Analysis + Scope
@@ -26,17 +25,16 @@ PM drops source doc in docs/projects/<name>/    or    no doc yet
 /analyze   Codebase scan → fill sections 5-6 + propose EA/GA scope
            Appends Scope Proposal to prd.md
       │
-      ├─ Needs Discussion N=0: reply "approved" → proceed to /tech-design
+      ├─ N=0 ⚡ items: reply "approved" → /tech-design
       │
-      └─ Needs Discussion N>0: hold joint meeting (~20 min)
-              Resolve ⚡ items → reply "approved" → proceed to /tech-design
+      └─ N>0 ⚡ items: hold joint meeting (~20 min)
+              Resolve ⚡ items → reply "approved" → /tech-design
       │
       ▼
 /tech-design   Full architecture spec on finalized scope
                (optional for UI-only features — /analyze will flag)
                                        │
-                                       │  Eng Lead replies "approved"
-                                       │  → Claude sets status: approved
+                                       │  reply "approved" → Claude sets status
 ```
 
 ### Phase 3 — Functional Requirements
@@ -45,8 +43,7 @@ PM drops source doc in docs/projects/<name>/    or    no doc yet
 /func-req   Generates EA first, then GA
             GA auto-skipped if no GA stories in Scope Proposal
                                        │
-                                       │  Eng Lead replies "approved"
-                                       │  → Claude sets status: approved on each file
+                                       │  reply "approved" → Claude sets status
 ```
 
 ### Phase 4 — JIRA Ticket Creation
@@ -91,7 +88,7 @@ One status field, same three values across all files:
 | Value | Set by | Means |
 |-------|--------|-------|
 | `draft` | AI (automatic) | Generated. Not yet reviewed. |
-| `approved` | Human (reply "approved") | Reviewed and signed off. Claude updates the file. Downstream skills can proceed. |
+| `approved` | Human (reply "approved") | Reviewed and signed off. Downstream skills can proceed. |
 | `done` | AI (automatic) | Terminal. JIRA tickets created. |
 
 `prd.md` only uses `draft` and `approved`. Scope readiness is determined by the Scope Proposal section contents (no ⚡ items = scope is resolved), not a separate status value.
