@@ -1,6 +1,6 @@
 ---
 name: scope-propose
-description: Use when a PRD is approved and you need to propose an EA/GA scope cut for PM and engineering lead to align on before tech design begins. Uses judgment to assign stories to EA/GA and appends a Scope Proposal + Meeting Brief to prd.md with debatable items flagged.
+description: "Use when a PRD is approved and you need to propose an EA/GA scope cut for PM and engineering lead to align on before tech design begins. Uses judgment to assign stories to EA/GA and appends a Scope Proposal + Meeting Brief to prd.md with debatable items flagged."
 ---
 
 # Scope Propose Skill
