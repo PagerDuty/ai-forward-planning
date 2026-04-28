@@ -96,7 +96,11 @@ design-mocks: <figma-url or blank>
 
 > "PRD saved to `docs/projects/<name>/prd.md`.
 >
-> Review the user stories and priority tags. When ready, set `status: approved` and run `/analyze --project <name>`."
+> Review the user stories and priority tags. Reply **approved** when ready."
+
+If the user replies with approval language ("approved", "lgtm", "looks good", "ship it", etc.):
+1. Set `status: approved` in `docs/projects/<name>/prd.md`
+2. Reply: "PRD approved. **Next: `/analyze`** — scans the codebase to fill in technical context (sections 5-6), scores each story for EA vs GA, and appends a Scope Proposal. Run `/analyze --project <name>` when ready."
 
 ---
 

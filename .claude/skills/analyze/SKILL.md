@@ -127,14 +127,16 @@ Needs discussion: <N> items
 **If N=0:**
 > "Analysis complete. Sections 5-6 filled and Scope Proposal appended to `docs/projects/<name>/prd.md`.
 >
-> All stories have clear signals — no meeting needed. Review the Scope Proposal, confirm with PM, then run `/tech-design --project <name>`."
+> All stories have clear signals — no meeting needed. Review the Scope Proposal and reply **approved** when ready."
 
 **If N>0:**
 > "Analysis complete. Sections 5-6 filled and Scope Proposal appended to `docs/projects/<name>/prd.md`.
 >
-> Hold a joint meeting (~20 min) to resolve the ⚡ items in the Scope Proposal — each item has EA/GA cases and a recommendation to react to.
->
-> After the meeting: move resolved ⚡ items to ✅ EA or ⏩ GA in the Scope Proposal, then run `/tech-design --project <name>`."
+> <N> stories need a scope decision — each has an EA case, GA case, and recommendation. Hold a quick joint meeting (~20 min) to resolve them. Move each ⚡ item to ✅ EA or ⏩ GA in the Scope Proposal, then reply **approved**."
+
+If the user replies with approval language ("approved", "lgtm", "looks good", "done", etc.):
+1. Verify no ⚡ items remain in the Scope Proposal — if any remain, stop and ask the user to resolve them first.
+2. Reply: "Scope locked. **Next: `/tech-design`** — generates the full architecture spec: system overview, API contracts, DB schema, and infra plan scoped to the approved EA/GA cut. Run `/tech-design --project <name>` when ready."
 
 ---
 
