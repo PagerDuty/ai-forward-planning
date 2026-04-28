@@ -1,6 +1,6 @@
 ---
 name: jira-tickets
-description: Use when functional requirements are ready and approved, and you need to create JIRA Epics and Stories using JIRA MCP. Default (no --milestone) runs EA then GA sequentially. Use --milestone ea|ga only for recovery or partial re-runs.
+description: "Use when functional requirements are ready and approved, and you need to create JIRA Epics and Stories using JIRA MCP. Default (no --milestone) runs EA then GA sequentially. Use --milestone ea|ga only for recovery or partial re-runs."
 ---
 
 # JIRA Tickets Skill

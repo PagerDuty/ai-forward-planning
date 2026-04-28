@@ -1,6 +1,6 @@
 ---
 name: tech-design
-description: Use when a PRD is approved and scope is finalized. Covers system design, API contracts, DB schema, and infra. Requires GitHub MCP. Run after /scope-propose and the joint alignment meeting — scope must be locked before tech design begins.
+description: "Use when a PRD is approved and scope is finalized. Covers system design, API contracts, DB schema, and infra. Requires GitHub MCP. Run after /scope-propose and the joint alignment meeting — scope must be locked before tech design begins."
 ---
 
 # Tech Design Skill

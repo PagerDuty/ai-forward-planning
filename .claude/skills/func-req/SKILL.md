@@ -1,6 +1,6 @@
 ---
 name: func-req
-description: Use when tech design is reviewed and you need to generate functional requirements. Default (no --milestone) runs EA then GA sequentially. Use --milestone ea|ga only for recovery or partial re-runs.
+description: "Use when tech design is reviewed and you need to generate functional requirements. Default (no --milestone) runs EA then GA sequentially. Use --milestone ea|ga only for recovery or partial re-runs."
 ---
 
 # Functional Requirements Skill

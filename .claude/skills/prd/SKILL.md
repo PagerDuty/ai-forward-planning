@@ -1,6 +1,6 @@
 ---
 name: prd
-description: Use when a PM has a rough idea or written PRD that needs to be structured into the standard format with P0/P1/P2-tagged user stories. Three modes: default (interview PM), --ingest (restructure existing PM doc), --enrich (codebase scan to fill engineering context).
+description: "Use when a PM has a rough idea or written PRD that needs to be structured into the standard format with P0/P1/P2-tagged user stories. Three modes: default (interview PM), --ingest (restructure existing PM doc), --enrich (codebase scan to fill engineering context)."
 ---
 
 # PRD Skill
