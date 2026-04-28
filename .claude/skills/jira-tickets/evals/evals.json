@@ -3,11 +3,10 @@
   "evals": [
     {
       "id": 1,
-      "prompt": "Run /jira-tickets --project audit-log-jt --milestone ea\n\nJIRA MCP is NOT available. Instead of calling MCP, produce a dry-run plan showing exactly what you would create. Write the plan to docs/projects/audit-log-jt/jira-tickets-plan.md.\n\nThe plan must show:\n- Epic: summary and description\n- Each Story: summary, description (End Goal / Implementation Details / Out of Scope sections), work-type suffix, sizing estimate (// est: ~N days)\n\nJIRA config is pre-set in docs/projects/audit-log-jt/.jira-config.md (project: PROJ, prefix: WE, label: Audit_Log).\nFunctional requirements are in docs/projects/audit-log-jt/functional-requirements-ea.md (status: approved).",
-      "expected_output": "jira-tickets-plan.md with one Epic and one Story per technical task (not one per user story). Each story has [API]/[UI]/[DB]/[OPS] prefix, sizing estimate, End Goal / Implementation Details / Out of Scope sections. EA blocker tasks flagged for manual dependency linking.",
+      "prompt": "Run /jira-tickets --project audit-log-jt\n\nJIRA MCP is NOT available. Instead of calling MCP, produce a dry-run plan showing exactly what you would create. Write the plan to docs/projects/audit-log-jt/jira-tickets-plan.md.\n\nThe plan must show:\n- Epic: summary and description\n- Each Story: summary, description (End Goal / Implementation Details / Out of Scope sections), work-type suffix, sizing estimate (// est: ~N days)\n\nWhen asked for JIRA config, use: project: PROJ, prefix: WE, label: Audit_Log.\nFunctional requirements are in docs/projects/audit-log-jt/functional-requirements-ea.md (status: approved).",
+      "expected_output": "jira-tickets-plan.md with one Epic and one Story per technical task (not one per user story). Each story has [API]/[UI]/[DB]/[OPS] prefix, sizing estimate, End Goal / Implementation Details / Out of Scope sections. EA blocker tasks noted inline in Implementation Details.",
       "files": [
         "docs/projects/audit-log-jt/functional-requirements-ea.md",
-        "docs/projects/audit-log-jt/.jira-config.md",
         "docs/projects/audit-log-jt/prd.md"
       ],
       "assertions": [
@@ -28,7 +27,7 @@
           "check": "llm"
         },
         {
-          "text": "EA blocker stories (for OTQ-3, OTQ-4, OTQ-5 dependencies) are flagged in the plan — either as dependency link notes or explicit blocker callouts",
+          "text": "EA blocker stories (for OTQ-3, OTQ-4, OTQ-5 dependencies) are noted in Implementation Details with a manual linking instruction",
           "check": "llm"
         },
         {
@@ -39,11 +38,10 @@
     },
     {
       "id": 2,
-      "prompt": "Run /jira-tickets --project eo-rule-editor-jt --milestone ea\n\nJIRA MCP is NOT available. Instead of calling MCP, produce a dry-run plan showing exactly what you would create. Write the plan to docs/projects/eo-rule-editor-jt/jira-tickets-plan.md.\n\nThe plan must show:\n- Epic: summary and description\n- Each Story: summary, description (End Goal / Implementation Details / Out of Scope sections), work-type suffix, sizing estimate (// est: ~N days)\n\nJIRA config is pre-set in docs/projects/eo-rule-editor-jt/.jira-config.md (project: PROJ, prefix: WE, label: Rule_Editor_History).\nFunctional requirements are in docs/projects/eo-rule-editor-jt/functional-requirements-ea.md (status: approved).",
-      "expected_output": "jira-tickets-plan.md with one Epic and one Story per technical task (3 user stories should produce 5+ individual task stories). Each story has [UI] or [OPS] prefix (no backend), sizing estimate, structured description. External dependency on EA Audit Log team noted.",
+      "prompt": "Run /jira-tickets --project eo-rule-editor-jt\n\nJIRA MCP is NOT available. Instead of calling MCP, produce a dry-run plan showing exactly what you would create. Write the plan to docs/projects/eo-rule-editor-jt/jira-tickets-plan.md.\n\nThe plan must show:\n- Epic: summary and description\n- Each Story: summary, description (End Goal / Implementation Details / Out of Scope sections), work-type suffix, sizing estimate (// est: ~N days)\n\nWhen asked for JIRA config, use: project: PROJ, prefix: WE, label: Rule_Editor_History.\nFunctional requirements are in docs/projects/eo-rule-editor-jt/functional-requirements-ea.md (status: approved).",
+      "expected_output": "jira-tickets-plan.md with one Epic and one Story per technical task (3 user stories should produce 5+ individual task stories). Each story has [UI] or [OPS] prefix (no backend), sizing estimate, structured description. External dependency on EA Audit Log team noted inline.",
       "files": [
         "docs/projects/eo-rule-editor-jt/functional-requirements-ea.md",
-        "docs/projects/eo-rule-editor-jt/.jira-config.md",
         "docs/projects/eo-rule-editor-jt/prd.md"
       ],
       "assertions": [
@@ -64,7 +62,7 @@
           "check": "llm"
         },
         {
-          "text": "The EA Audit Log team external dependency is called out in at least one story's Implementation Details or as a blocker note",
+          "text": "The EA Audit Log team external dependency is called out in at least one story's Implementation Details",
           "check": "llm"
         }
       ]
