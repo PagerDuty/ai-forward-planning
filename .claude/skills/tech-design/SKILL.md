@@ -1,11 +1,11 @@
 ---
 name: tech-design
-description: "Use when a PRD is approved and scope is finalized. Covers system design, API contracts, DB schema, and infra. Requires GitHub MCP. Run after /scope-propose and the joint alignment meeting — scope must be locked before tech design begins."
+description: "Use when a PRD is approved and scope is finalized (Scope Proposal in prd.md has no remaining ⚡ items). Covers system design, API contracts, DB schema, and infra. Requires GitHub MCP. Run after /analyze and the joint alignment meeting."
 ---
 
 # Tech Design Skill
 
-Generate a deep technical spec from an approved, scope-finalized PRD. Uses GitHub MCP to scan existing architecture. Scoped to the EA/GA cut from the finalized Scope Proposal section of prd.md.
+Generate a deep technical spec from an approved, scope-finalized PRD. Uses GitHub MCP to scan existing architecture. Scoped to the EA/GA cut from the Scope Proposal section of `prd.md`.
 
 ## Arguments
 
@@ -15,20 +15,12 @@ Generate a deep technical spec from an approved, scope-finalized PRD. Uses GitHu
 
 - `--project` — matches the folder under `docs/projects/`. **Optional if `.current-project` is set.**
 
-## Resolve project name
-
-1. If `--project <name>` is provided: use it. Write the value to `.current-project` at the repo root.
-2. Else read `.current-project` from repo root — use the value if present.
-3. Else run `git branch --show-current`, strip common prefixes (`feature/`, `fix/`, `feat/`, `bugfix/`) and leading ticket numbers (e.g., `ENG-123-`). If `docs/projects/<slug>/` exists, use it.
-4. If none resolve: stop with — *"No project set. Provide `--project <name>` or run `echo '<name>' > .current-project` to set a default."*
-
-When resolved from `.current-project` or git branch (not from `--project`), confirm before proceeding: *"Using project `<name>` — is that right?"*
+**Resolve project:** `--project <name>` → write to `.current-project`. Else read `.current-project`. Else derive from git branch (strip `feature/`, `fix/`, `feat/`, `bugfix/`, leading ticket numbers like `ENG-123-`). If resolved from context, confirm first. If unresolvable, stop.
 
 **Preconditions:**
-1. `prd.md` must have `status: scope-finalized` — if still `approved`, stop with:
-   > "Scope is not yet finalized. Complete the joint alignment meeting, record scope decisions in the Scope Proposal section of `prd.md`, and set `status: scope-finalized` before running tech design. Tech design on unfinalized scope produces rework."
-2. `prd.md` must contain a **Scope Proposal** section with EA/GA assignments resolved (no unresolved ⚡ items) — if missing or all items still ⚡, warn:
-   > "Scope Proposal section is missing or unresolved. Run `/scope-propose --project <name>` and complete the alignment meeting before running tech design."
+1. `prd.md` must have `status: approved` — if not, stop: *"PRD not approved. Set `status: approved` in prd.md before running tech design."*
+2. `prd.md` must contain a **Scope Proposal** section with EA/GA assignments resolved (no remaining ⚡ items) — if missing or unresolved, stop:
+   > "Scope Proposal is missing or has unresolved ⚡ items. Run `/analyze --project <name>` and complete the alignment meeting before running tech design. Tech design on unfinalized scope produces rework."
 
 ---
 
@@ -40,24 +32,22 @@ Read before doing anything else:
 
 1. `docs/projects/<name>/prd.md` — full context: problem statement, goals, non-goals, user stories, affected surfaces (section 5), dependencies & constraints (section 6), and the Scope Proposal section. Check `design-mocks` in frontmatter.
 
-2. **Fetch design mocks (if present):** If `design-mocks` is set and non-empty, use `mcp__claude_ai_Figma__get_design_context` to fetch the Figma file. Extract: screens per story, UI components and their interactions, data displayed per screen (informs API response shape), form inputs and validation patterns (informs API request shape), and any states that imply background work (loading, polling, async operations). Use this throughout Steps 3-4 to ground API contracts and component design in what's actually designed — not inferred from text.
+2. **Fetch design mocks (if present):** If `design-mocks` is set and non-empty, use `mcp__claude_ai_Figma__get_design_context`. Extract: screens per story, UI components and their interactions, data displayed per screen (informs API response shape), form inputs and validation patterns (informs API request shape), and any states that imply background work (loading, polling, async operations). Use this throughout Steps 3-4 to ground API contracts and component design in what's actually designed — not inferred from text.
 
-Use the Scope Proposal section in `prd.md` for the approved EA/GA cut. Use sections 5-6 as a starting point for the codebase scan — these surfaces and dependencies were already identified by `/prd --enrich`. The scan goes deeper, not wider.
+Use the Scope Proposal section in `prd.md` for the approved EA/GA cut. Sections 5-6 are a starting point for the codebase scan — these surfaces and dependencies were already identified by `/analyze`. The scan goes deeper, not wider.
 
 ### Step 2: Identify repos to scan
 
-Based on the affected surfaces in section 5, ask the engineering lead:
-> "Based on the affected surfaces (API, UI, DB, etc.), I need to scan the relevant repos. Which repos contain: [list surfaces from section 5]? Provide as `org/repo`."
-
-This is more targeted than a blank question — engineering lead confirms or corrects the mapping.
+Based on the affected surfaces in section 5, ask:
+> "Based on the affected surfaces, I need to scan the relevant repos. Which repos contain: [list surfaces from section 5]? Provide as `org/repo`."
 
 If the engineering lead cannot identify a repo for a surface, note it as "Repo unknown — manual identification required" in the Open Technical Questions section and proceed with the repos that are identified.
 
 ### Step 3: Scan repos with GitHub MCP
 
-For each repo, focus scanning on areas relevant to the affected surfaces — don't scan everything.
+For each repo, focus on areas relevant to the affected surfaces — don't scan everything.
 
-Begin the scan by opening the specific files already identified in PRD sections 5-6 as entry points. These were found by `/prd --enrich` and represent the most relevant areas. Scan deeper from those locations rather than from the repo root.
+Begin from the specific files already identified in PRD sections 5-6 as entry points. Scan deeper from those locations rather than from the repo root.
 
 For each relevant surface, extract:
 - File tree (top 2 levels) to understand structure
@@ -69,7 +59,7 @@ For each relevant surface, extract:
 
 ### Step 4: Draft the tech design
 
-Write a doc covering EA and GA scope separately where the work differs. For sections that are identical across milestones, note that once.
+Write a doc covering EA and GA scope separately where the work differs. For sections identical across milestones, note that once.
 
 ---
 
@@ -80,7 +70,7 @@ Write a doc covering EA and GA scope separately where the work differs. For sect
 Table: Component | Responsibility | Technology | Owned by | EA / GA / Both
 
 #### Data Flow
-Numbered sequence for the primary use case. For complex flows, include a sequence diagram in plain text or mermaid.
+Numbered sequence for the primary use case. For complex flows, include a sequence diagram in mermaid.
 
 #### API Contracts
 For each new or modified endpoint, tag with `[EA]` or `[GA]`:
@@ -92,9 +82,6 @@ Request params: date_from (ISO8601), date_to (ISO8601), user_id (optional)
 Response 200: { logs: [{ id, user_id, action, timestamp }], total, page }
 Response 400: { error: string }
 Response 403: { error: "Insufficient permissions" }
-
-[GA] POST /audit-logs/webhooks
-...
 ```
 
 #### Database Schema
@@ -132,9 +119,7 @@ Unresolved design decisions that need an answer before implementation begins. Fl
 
 ### Step 5: Write file
 
-Write to `docs/projects/<name>/tech-design.md`.
-
-Include an inline repos-scanned comment block:
+Write to `docs/projects/<name>/tech-design.md`:
 
 ```markdown
 ---
@@ -159,8 +144,7 @@ status: draft
 
 ## Notes
 
-- This skill is optional — skip for pure UX/product changes with no backend or data model work. If you skip it, run `/func-req` next — it will offer to auto-create a minimal stub when `tech-design.md` is not found
+- This skill is optional — skip for pure UX/product changes with no backend or data model work. `/analyze` will flag when all surfaces are UI-only; `/func-req` will offer a UX-only path if `tech-design.md` is absent.
 - Scan only the repos relevant to the affected surfaces — not the entire org
 - Sections 5-6 in the enriched PRD are a starting point, not the complete picture — the deep scan may surface additional dependencies
-- `repos-scanned` is recorded as an inline comment block in the doc, not in frontmatter — it is not read by downstream skills
-- **Re-entry after scope change:** If scope decisions change significantly after `status: approved` has been set (e.g., a major story is moved between EA and GA), the eng lead should set `tech-design.md` back to `status: draft`, revise the relevant sections, and re-approve. Do not silently leave an approved tech design that no longer reflects the agreed scope.
+- **Re-entry after scope change:** If scope decisions change significantly after `status: approved`, set `tech-design.md` back to `status: draft`, revise the relevant sections, and re-approve. Do not leave an approved tech design that no longer reflects the agreed scope.
