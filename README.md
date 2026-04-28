@@ -23,7 +23,7 @@ PM drops source doc in docs/projects/<name>/    or    no doc yet
 
 ```
 /analyze   Codebase scan → fill sections 5-6 + propose EA/GA scope
-           Appends Scope Proposal + Meeting Brief to prd.md
+           Appends Scope Proposal to prd.md
       │
       ├─ Needs Discussion N=0: no meeting needed → run /tech-design directly
       │

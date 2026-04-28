@@ -120,42 +120,7 @@ GA: <N> stories
 Needs discussion: <N> items
 ```
 
-### Step 6: Append Meeting Brief (if N > 0)
-
-If any stories are in Needs Discussion, append immediately after the Scope Proposal:
-
-```markdown
----
-
-## Meeting Brief
-
-**Purpose:** 20-minute joint meeting. React to concrete proposals — don't start from scratch.
-
-### Scope Decisions Required (<N> items)
-
-**US-XX [P0] <story summary>**
-- EA case: <reason>
-- GA case: <reason>
-- Recommendation: <EA or GA>
-- Decision: ___
-
-### EA Blockers (<N> items)
-
-<!-- Stories that cannot ship EA until an external dependency is resolved. If none, omit section. -->
-- **<Blocker>** — <what is blocked> — Owner: ___
-
-### Risk Flags (<N> items)
-
-<!-- Elevated risk: high-complexity story in EA, unresolved dep in EA, strong signal conflict. If none, omit. -->
-- **<Risk>** — <why> — Mitigation: ___
-
-### After This Meeting
-
-- [ ] Eng Lead: move each ⚡ item to ✅ EA or ⏩ GA in the Scope Proposal above
-- [ ] Eng Lead: run `/tech-design --project <name>`
-```
-
-### Step 7: Prompt
+### Step 6: Prompt
 
 **UI-only check:** If all affected surfaces are UI/frontend-only (no API, DB, backend workers, or external service changes), add: *"Affected surfaces appear UI-only. You may be able to skip `/tech-design` — `/func-req` will confirm and offer a UX-only path."*
 
@@ -165,9 +130,9 @@ If any stories are in Needs Discussion, append immediately after the Scope Propo
 > All stories have clear signals — no meeting needed. Review the Scope Proposal, confirm with PM, then run `/tech-design --project <name>`."
 
 **If N>0:**
-> "Analysis complete. Sections 5-6 filled, Scope Proposal and Meeting Brief appended to `docs/projects/<name>/prd.md`.
+> "Analysis complete. Sections 5-6 filled and Scope Proposal appended to `docs/projects/<name>/prd.md`.
 >
-> Share `prd.md` with the PM — the Meeting Brief section is the agenda. Hold the joint meeting (~20 min) to resolve the ⚡ items.
+> Hold a joint meeting (~20 min) to resolve the ⚡ items in the Scope Proposal — each item has EA/GA cases and a recommendation to react to.
 >
 > After the meeting: move resolved ⚡ items to ✅ EA or ⏩ GA in the Scope Proposal, then run `/tech-design --project <name>`."
 
