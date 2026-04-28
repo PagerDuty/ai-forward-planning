@@ -123,7 +123,6 @@ docs/
       tech-design.md                  # /tech-design output
       functional-requirements-ea.md   # /func-req output
       functional-requirements-ga.md   # /func-req output (if GA scope exists)
-      .jira-config.md                 # saved JIRA project key, prefix, label
 ```
 
 ## EA vs GA

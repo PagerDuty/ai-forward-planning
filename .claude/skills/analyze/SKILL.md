@@ -1,6 +1,6 @@
 ---
 name: analyze
-description: "Run after PM approves prd.md. Scans the codebase to fill sections 5-6, proposes EA/GA scope cut, and appends Scope Proposal + Meeting Brief to prd.md in one pass. Replaces /prd --enrich and /scope-propose."
+description: "Run after PM approves prd.md. Scans the codebase to fill sections 5-6, proposes EA/GA scope cut, and appends Scope Proposal to prd.md in one pass."
 ---
 
 # Analyze Skill

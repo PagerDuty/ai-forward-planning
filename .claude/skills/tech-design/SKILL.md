@@ -50,7 +50,7 @@ For each relevant surface, extract:
 - Worker/job files for background processing surfaces
 - Service boundary definitions and integration points
 
-### Step 4: Draft the tech design
+### Step 3: Draft the tech design
 
 Write a doc covering EA and GA scope separately where the work differs. For sections identical across milestones, note that once.
 
@@ -110,7 +110,7 @@ Unresolved design decisions that need an answer before implementation begins. Fl
 
 ---
 
-### Step 5: Write file
+### Step 4: Write file
 
 Write to `docs/projects/<name>/tech-design.md`:
 
@@ -124,7 +124,7 @@ status: draft
 <!-- repos-scanned: [org/repo, ...] -->
 ```
 
-### Step 6: Prompt engineering lead review
+### Step 5: Prompt engineering lead review
 
 > "Tech design drafted and saved to `docs/projects/<name>/tech-design.md`.
 >
