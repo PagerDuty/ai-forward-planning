@@ -25,7 +25,7 @@ Fills engineering context and proposes EA/GA scope in one pass. Run after PM set
 
 Read `docs/projects/<name>/prd.md` in full. Verify `status: approved` — stop if not. Check `design-mocks` in frontmatter.
 
-**Fetch design mocks (if present):** If `design-mocks` is set and non-empty, use `mcp__claude_ai_Figma__get_design_context`. Extract: screens per user story, interaction complexity (simple toggle vs. multi-state flows), edge-case states (empty, error, loading), MVP vs. polished signals. Hold for Step 3.
+**Fetch design mocks (if present):** If `design-mocks` is set and non-empty, use `mcp__claude_ai_Figma__get_design_context`. Extract: screens per user story, interaction complexity (simple toggle vs. multi-state flows), edge-case states (empty, error, loading), MVP vs. polished signals. Write a `### Design Mocks Summary` subsection into section 5 when filling it in Step 3 — downstream skills (`/tech-design`, `/func-req`) read from there instead of re-fetching.
 
 ### Step 2: Scan codebase
 

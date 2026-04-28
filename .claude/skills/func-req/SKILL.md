@@ -34,9 +34,7 @@ Read all files before generating anything:
 
 1. `docs/projects/<name>/prd.md` — user stories (section 4), goals (section 2), non-goals (section 3), dependencies (section 6), and the Scope Proposal section (EA/GA assignments). Check `design-mocks` in frontmatter.
 2. `docs/projects/<name>/tech-design.md` — API contracts, DB schema, component changes, integration points, open technical questions
-3. `docs/projects/<name>/functional-requirements-ea.md` if it exists — read to identify what was already scoped in EA; GA must not repeat those tasks
-
-**Fetch design mocks (if present):** If `design-mocks` is set, fetch via Figma MCP. Map each screen to its US-XX story. Reference specific screen names in acceptance criteria where they add precision — behavioral states only, not visual styling.
+**Design mocks (if present):** If section 5 of `prd.md` contains a Design Mocks Summary (written by `/analyze`), read it. Map screens to US-XX stories. Reference specific screen names in acceptance criteria where they add precision — behavioral states only, not visual styling.
 
 ### Step 2: Determine milestones and select stories
 
@@ -119,6 +117,6 @@ jira-epic-key:
 
 ## Notes
 
-- GA stories are additive over EA — do not repeat what was already scoped in EA (Step 1)
+- GA stories are additive over EA — the strict selection rule (Step 2) enforces this: ✅ stories go to EA, ⏩ stories go to GA, never both
 - Technical tasks come from the tech design — if the tech design is thin, the task breakdown will be thin; ask eng lead to enrich it first
 - Misc / launch tasks (docs, runbook, comms) should be included as stories, not buried in notes

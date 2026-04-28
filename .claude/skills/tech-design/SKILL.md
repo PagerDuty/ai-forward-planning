@@ -1,6 +1,6 @@
 ---
 name: tech-design
-description: "Use when a PRD is approved and scope is finalized (Scope Proposal in prd.md has no remaining ⚡ items). Covers system design, API contracts, DB schema, and infra. Requires GitHub MCP. Run after /analyze and the joint alignment meeting."
+description: "Use when prd.md is approved and the Scope Proposal has no remaining ⚡ items. Covers system design, API contracts, DB schema, and infra. Requires GitHub MCP. Run after /analyze and the joint alignment meeting."
 ---
 
 # Tech Design Skill
@@ -30,20 +30,13 @@ Generate a deep technical spec from an approved PRD with a finalized Scope Propo
 
 Read before doing anything else:
 
-1. `docs/projects/<name>/prd.md` — full context: problem statement, goals, non-goals, user stories, affected surfaces (section 5), dependencies & constraints (section 6), and the Scope Proposal section. Check `design-mocks` in frontmatter.
+1. `docs/projects/<name>/prd.md` — full context: problem statement, goals, non-goals, user stories, affected surfaces (section 5, which includes repos and any Design Mocks Summary written by `/analyze`), dependencies & constraints (section 6), and the Scope Proposal section.
 
-2. **Fetch design mocks (if present):** If `design-mocks` is set and non-empty, use `mcp__claude_ai_Figma__get_design_context`. Extract: screens per story, UI components and their interactions, data displayed per screen (informs API response shape), form inputs and validation patterns (informs API request shape), and any states that imply background work (loading, polling, async operations). Use this throughout Steps 3-4 to ground API contracts and component design in what's actually designed — not inferred from text.
+Use section 5 to determine which repos to scan and as entry points for the deeper scan — `/analyze` already identified these. If a Design Mocks Summary is present in section 5, use it to ground API contracts and component design. The Scope Proposal section provides the approved EA/GA cut. The scan here goes deeper, not wider.
 
-Use the Scope Proposal section in `prd.md` for the approved EA/GA cut. Sections 5-6 are a starting point for the codebase scan — these surfaces and dependencies were already identified by `/analyze`. The scan goes deeper, not wider.
+If any surface in section 5 has "Repo unknown — manual identification required", ask the eng lead to provide the repo before scanning that surface.
 
-### Step 2: Identify repos to scan
-
-Based on the affected surfaces in section 5, ask:
-> "Based on the affected surfaces, I need to scan the relevant repos. Which repos contain: [list surfaces from section 5]? Provide as `org/repo`."
-
-If the engineering lead cannot identify a repo for a surface, note it as "Repo unknown — manual identification required" in the Open Technical Questions section and proceed with the repos that are identified.
-
-### Step 3: Scan repos with GitHub MCP
+### Step 2: Scan repos with GitHub MCP
 
 For each repo, focus on areas relevant to the affected surfaces — don't scan everything.
 
