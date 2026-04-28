@@ -111,7 +111,11 @@ jira-epic-key:
 > - `docs/projects/<name>/functional-requirements-ea.md`
 > - `docs/projects/<name>/functional-requirements-ga.md` *(if GA exists)*
 >
-> Review stories, acceptance criteria, and technical task groupings. Set `status: approved` on each file when ready, then run `/jira-tickets`."
+> Review stories, acceptance criteria, and technical task groupings. Reply **approved** when ready."
+
+If the user replies with approval language ("approved", "lgtm", "looks good", etc.):
+1. Set `status: approved` on each drafted functional requirements file.
+2. Reply: "Functional requirements approved. **Next: `/jira-tickets`** — creates one JIRA Epic per milestone and one Story per technical task (~3 days each), sized and linked. Run `/jira-tickets --project <name>` when ready."
 
 ---
 

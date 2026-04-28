@@ -128,10 +128,15 @@ status: draft
 
 > "Tech design drafted and saved to `docs/projects/<name>/tech-design.md`.
 >
-> Review the draft:
-> 1. Verify `[EA]` / `[GA]` tags on API contracts, DB schema, and components are correct
-> 2. Resolve or flag any open technical questions
-> 3. Set `status: approved` to proceed to `/func-req`"
+> Review:
+> 1. `[EA]` / `[GA]` tags on API contracts, DB schema, and components are correct
+> 2. Open technical questions are resolved or flagged
+>
+> Reply **approved** when ready."
+
+If the user replies with approval language ("approved", "lgtm", "looks good", etc.):
+1. Set `status: approved` in `docs/projects/<name>/tech-design.md`
+2. Reply: "Tech design approved. **Next: `/func-req`** — generates functional requirements (one epic + stories per milestone) with acceptance criteria and technical task breakdowns traced to this design. Run `/func-req --project <name>` when ready."
 
 ---
 
