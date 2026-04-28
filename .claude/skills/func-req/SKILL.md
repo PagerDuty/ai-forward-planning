@@ -15,7 +15,7 @@ Generate functional requirements docs (one epic + stories per milestone) from th
 
 - `--project` — matches folder under `docs/projects/`. **Optional if `.current-project` is set.**
 
-**Resolve project:** Use `--project <name>` if provided (writes to `.current-project`). Else read `.current-project`. If neither, stop: *"No project set. Run with `--project <name>` or set `.current-project`."*
+**Project:** `--project <name>` or `.current-project` — stop if neither.
 
 ## Preconditions
 

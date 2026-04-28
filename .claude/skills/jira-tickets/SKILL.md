@@ -15,7 +15,7 @@ Create JIRA Epics and Stories from approved functional requirements docs using J
 
 - `--project` — matches folder under `docs/projects/`. **Optional if `.current-project` is set.**
 
-**Resolve project:** Use `--project <name>` if provided (writes to `.current-project`). Else read `.current-project`. If neither, stop: *"No project set. Run with `--project <name>` or set `.current-project`."*
+**Project:** `--project <name>` or `.current-project` — stop if neither.
 
 **Precondition:** Check which func-req files exist and have `status: approved`:
 - If `functional-requirements-ea.md` exists and is approved: run EA.
