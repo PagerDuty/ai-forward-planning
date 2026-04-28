@@ -13,7 +13,7 @@ Fills engineering context and proposes EA/GA scope in one pass. Run after PM set
 /analyze --project <name>
 ```
 
-**Resolve project:** Use `--project <name>` if provided (writes to `.current-project`). Else read `.current-project`. If neither, stop: *"No project set. Run with `--project <name>` or set `.current-project`."*
+**Project:** `--project <name>` or `.current-project` — stop if neither.
 
 **Precondition:** `prd.md` must have `status: approved`.
 

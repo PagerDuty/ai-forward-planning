@@ -15,7 +15,7 @@ Reads whatever the PM has — a full PRD, rough notes, or nothing — and produc
 /prd --project <name> --mocks <figma-url> # include Figma mocks
 ```
 
-**Resolve project:** Use `--project <name>` if provided (writes to `.current-project`). Else read `.current-project`. If neither, stop: *"No project set. Run with `--project <name>` or set `.current-project`."*
+**Project:** `--project <name>` or `.current-project` — stop if neither.
 
 ---
 

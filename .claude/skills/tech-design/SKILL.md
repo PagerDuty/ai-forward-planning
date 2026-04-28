@@ -15,7 +15,7 @@ Generate a deep technical spec from an approved PRD with a finalized Scope Propo
 
 - `--project` — matches the folder under `docs/projects/`. **Optional if `.current-project` is set.**
 
-**Resolve project:** Use `--project <name>` if provided (writes to `.current-project`). Else read `.current-project`. If neither, stop: *"No project set. Run with `--project <name>` or set `.current-project`."*
+**Project:** `--project <name>` or `.current-project` — stop if neither.
 
 **Preconditions:**
 1. `prd.md` must have `status: approved` — if not, stop: *"PRD not approved. Set `status: approved` in prd.md before running tech design."*
