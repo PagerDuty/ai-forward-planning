@@ -4,3 +4,6 @@
 .env
 *.env
 .claude/settings.local.json
+.current-project
+.superpowers/
+*-workspace/

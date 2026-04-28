@@ -1,0 +1,75 @@
+{
+  "skill_name": "func-req",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Run /func-req --project audit-log-fr\n\nThis is a backend feature with both EA and GA milestones. Generate functional requirements for both milestones sequentially. Read docs/projects/audit-log-fr/prd.md and docs/projects/audit-log-fr/tech-design.md as inputs. Write output to docs/projects/audit-log-fr/functional-requirements-ea.md and docs/projects/audit-log-fr/functional-requirements-ga.md.",
+      "expected_output": "Two functional requirements files: functional-requirements-ea.md covering US-01, US-02, US-04, US-06, US-09, US-14 and functional-requirements-ga.md covering US-03, US-05, US-07, US-08, US-10, US-11, US-12, US-13. Every technical task cites a tech-design.md section. No story appears in both docs. AI Workflows team dependency flagged in GA doc.",
+      "files": [
+        "docs/projects/audit-log-fr/prd.md",
+        "docs/projects/audit-log-fr/tech-design.md"
+      ],
+      "assertions": [
+        {
+          "text": "functional-requirements-ea.md contains story blocks for all 6 EA stories: US-01, US-02, US-04, US-06, US-09, and US-14",
+          "check": "grep"
+        },
+        {
+          "text": "functional-requirements-ga.md contains story blocks for all 8 GA stories: US-03, US-05, US-07, US-08, US-10, US-11, US-12, and US-13",
+          "check": "grep"
+        },
+        {
+          "text": "No US-XX story ID appears in both functional-requirements-ea.md and functional-requirements-ga.md (no overlap between EA and GA docs)",
+          "check": "script"
+        },
+        {
+          "text": "Every technical task line in both documents includes a parenthetical citation referencing tech-design.md (e.g., '(tech-design.md: API Contracts)' or '(tech-design.md: DB Schema)')",
+          "check": "llm"
+        },
+        {
+          "text": "Both output files have 'status: draft' in their YAML frontmatter",
+          "check": "grep"
+        },
+        {
+          "text": "Epic titles use the [EA] and [GA] prefix format (e.g., '# Epic: [EA] WE Audit Log')",
+          "check": "grep"
+        },
+        {
+          "text": "US-07 in functional-requirements-ga.md includes an external dependency task referencing the AI Workflows team and is flagged with the EA blocker or dependency marker",
+          "check": "llm"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Run /func-req --project rule-editor-history-fr\n\nThis is a UI-only feature with all stories in EA and no GA scope. Generate functional requirements. Read docs/projects/rule-editor-history-fr/prd.md and docs/projects/rule-editor-history-fr/tech-design.md as inputs. Write output to docs/projects/rule-editor-history-fr/functional-requirements-ea.md.",
+      "expected_output": "One functional requirements file: functional-requirements-ea.md covering US-01, US-02, US-03. No GA file created. No invented backend endpoints. All technical tasks are UI-only (React components, hooks). Each task cites tech-design.md. EA Audit Log team dependency noted.",
+      "files": [
+        "docs/projects/rule-editor-history-fr/prd.md",
+        "docs/projects/rule-editor-history-fr/tech-design.md"
+      ],
+      "assertions": [
+        {
+          "text": "functional-requirements-ea.md contains story blocks for all 3 EA stories: US-01, US-02, and US-03",
+          "check": "grep"
+        },
+        {
+          "text": "No functional-requirements-ga.md file is created (no GA stories exist in the scope proposal)",
+          "check": "file_absent"
+        },
+        {
+          "text": "No new backend API endpoints are invented as technical tasks — only the existing /internal/audit-events endpoint is referenced (feature is UI-only)",
+          "check": "llm"
+        },
+        {
+          "text": "Every technical task line includes a parenthetical citation referencing tech-design.md",
+          "check": "llm"
+        },
+        {
+          "text": "At least one story includes an external dependency task noting the EA Audit Log team as the owner (the inline panel depends on their API)",
+          "check": "llm"
+        }
+      ]
+    }
+  ]
+}

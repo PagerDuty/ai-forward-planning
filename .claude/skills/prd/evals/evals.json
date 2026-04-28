@@ -1,0 +1,49 @@
+{
+  "skill_name": "prd",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "/prd --ingest --project audit-log --file evals/files/audit-log-pm-doc.md\n\nThe file evals/files/audit-log-pm-doc.md is located at /Users/nwadhwa/prd-to-jira/.claude/skills/prd/evals/files/audit-log-pm-doc.md. Work in /Users/nwadhwa/prd-to-jira as the project root.",
+      "expected_output": "A well-structured prd.md at docs/projects/audit-log/prd.md with all 14 user stories from the PM doc assigned stable US-XX IDs and P0/P1/P2 tags, sections 5-6 as empty placeholders, no EA/GA split, and status: draft.",
+      "files": ["evals/files/audit-log-pm-doc.md"],
+      "expectations": [
+        "All user stories in the output prd.md have a stable US-XX ID (e.g. US-01, US-02) prefixed before the priority tag",
+        "Every user story has exactly one priority tag: [P0], [P1], or [P2]",
+        "The PM doc had 14 user stories — the output prd.md contains exactly 14 user stories (no stories added or dropped)",
+        "The 'Affected Surfaces' and 'Dependencies & Constraints' sections each contain only an HTML comment placeholder and no actual content",
+        "The output file has status: draft in its YAML frontmatter",
+        "The output does not split stories into EA or GA milestone sections",
+        "No requirements, metrics, or open questions were invented that were not present in the source PM doc"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "/prd --ingest --project alert-suppression --file evals/files/alert-suppression-pm-notes.md\n\nThe file evals/files/alert-suppression-pm-notes.md is located at /Users/nwadhwa/prd-to-jira/.claude/skills/prd/evals/files/alert-suppression-pm-notes.md. Work in /Users/nwadhwa/prd-to-jira as the project root.",
+      "expected_output": "A prd.md at docs/projects/alert-suppression/prd.md. User stories extracted from prose notes with US-XX IDs. Stories that cannot be confidently priority-tagged are flagged for PM review rather than silently guessed. Non-goals section is flagged as incomplete (the PM doc has a partial non-goals section with an explicit 'need to think through more' note). No invented requirements.",
+      "files": ["evals/files/alert-suppression-pm-notes.md"],
+      "expectations": [
+        "All extracted user stories have a stable US-XX ID prefixed before the priority tag",
+        "Any story that cannot be confidently tagged based on PM's language is explicitly flagged for PM review rather than silently assigned a tag",
+        "The Non-Goals section in the output flags or notes that the PM indicated this was incomplete ('need to think through more') — it does not silently invent non-goals",
+        "The 'Affected Surfaces' and 'Dependencies & Constraints' sections each contain only an HTML comment placeholder and no actual content",
+        "The output file has status: draft in its YAML frontmatter",
+        "No requirements, metrics, or open questions were invented that were not present or strongly implied in the source notes",
+        "The output does not split stories into EA or GA sections"
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "/prd --ingest --project ai-recommendations --file evals/files/ai-rule-recommendations-pm-doc.md\n\nThe file evals/files/ai-rule-recommendations-pm-doc.md is located at /Users/nwadhwa/prd-to-jira/.claude/skills/prd/evals/files/ai-rule-recommendations-pm-doc.md. Work in /Users/nwadhwa/prd-to-jira as the project root.",
+      "expected_output": "A prd.md at docs/projects/ai-recommendations/prd.md with all 7 user stories tagged, an AI Considerations placeholder added under Open Questions (because the PM doc describes ML model, training data, and privacy considerations), sections 5-6 empty, status: draft.",
+      "files": ["evals/files/ai-rule-recommendations-pm-doc.md"],
+      "expectations": [
+        "All 7 user stories from the PM doc have stable US-XX IDs and P0/P1/P2 tags",
+        "An AI Considerations placeholder is added under the Open Questions section (triggered by ML model, training data, and privacy content in the source doc)",
+        "The 'Affected Surfaces' and 'Dependencies & Constraints' sections each contain only an HTML comment placeholder and no actual content",
+        "The output file has status: draft in its YAML frontmatter",
+        "The output does not split stories into EA or GA sections",
+        "No requirements, metrics, or open questions were invented beyond what the PM doc contains"
+      ]
+    }
+  ]
+}

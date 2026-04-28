@@ -1,0 +1,33 @@
+{
+  "skill_name": "tech-design",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "/tech-design --project audit-log\n\nThe PRD is at /Users/nwadhwa/prd-to-jira/.claude/skills/tech-design/evals/files/audit-log-scoped-prd.md. Copy it to docs/projects/audit-log/prd.md before running. Work in /Users/nwadhwa/prd-to-jira as the project root. When asked which repos to scan, use acme/workflow-engine.",
+      "expected_output": "A tech-design.md at docs/projects/audit-log/tech-design.md with API contracts tagged [EA] or [GA], a DB schema section with the audit_events table, a repos-scanned comment block, status: draft frontmatter, and Open Technical Questions section. EA and GA work clearly separated.",
+      "files": ["evals/files/audit-log-scoped-prd.md"],
+      "expectations": [
+        "Every API endpoint in the API Contracts section is tagged with either [EA] or [GA]",
+        "Each API endpoint documents at minimum: HTTP method + path, auth requirement, request parameters, and at least one response code with shape",
+        "A Database Schema section is present with at least one table or schema change defined",
+        "An Open Technical Questions section is present",
+        "A repos-scanned HTML comment block is present in the document (format: <!-- repos-scanned: [...] -->)",
+        "The output file has status: draft in its YAML frontmatter",
+        "EA-scoped work is not duplicated in the GA section"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "/tech-design --project rule-editor-history\n\nThe PRD is at /Users/nwadhwa/prd-to-jira/.claude/skills/tech-design/evals/files/ux-only-scoped-prd.md. Copy it to docs/projects/rule-editor-history/prd.md before running. Work in /Users/nwadhwa/prd-to-jira as the project root. This is a UI-only feature with no backend changes — confirm before proceeding.",
+      "expected_output": "For a UI-only feature, the skill should either produce a minimal tech-design.md stub noting no backend changes, or explicitly confirm with the user that no API/DB/backend work is required. The output should not invent API contracts or DB schema that don't exist.",
+      "files": ["evals/files/ux-only-scoped-prd.md"],
+      "expectations": [
+        "The skill identifies this as a UI-only feature with no new backend endpoints or DB schema changes",
+        "No fabricated API endpoints are documented (the only API usage is reading from an existing internal endpoint)",
+        "No new DB schema changes are documented (the PRD explicitly states no DB changes required)",
+        "The output file has status: draft in its YAML frontmatter",
+        "A Components section describes the new UI component and its relationship to the existing rule editor"
+      ]
+    }
+  ]
+}

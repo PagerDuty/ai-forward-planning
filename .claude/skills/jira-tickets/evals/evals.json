@@ -1,0 +1,73 @@
+{
+  "skill_name": "jira-tickets",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Run /jira-tickets --project audit-log-jt --milestone ea\n\nJIRA MCP is NOT available. Instead of calling MCP, produce a dry-run plan showing exactly what you would create. Write the plan to docs/projects/audit-log-jt/jira-tickets-plan.md.\n\nThe plan must show:\n- Epic: summary and description\n- Each Story: summary, description (End Goal / Implementation Details / Out of Scope sections), work-type suffix, sizing estimate (// est: ~N days)\n\nJIRA config is pre-set in docs/projects/audit-log-jt/.jira-config.md (project: PROJ, prefix: WE, label: Audit_Log).\nFunctional requirements are in docs/projects/audit-log-jt/functional-requirements-ea.md (status: approved).",
+      "expected_output": "jira-tickets-plan.md with one Epic and one Story per technical task (not one per user story). Each story has [API]/[UI]/[DB]/[OPS] prefix, sizing estimate, End Goal / Implementation Details / Out of Scope sections. EA blocker tasks flagged for manual dependency linking.",
+      "files": [
+        "docs/projects/audit-log-jt/functional-requirements-ea.md",
+        "docs/projects/audit-log-jt/.jira-config.md",
+        "docs/projects/audit-log-jt/prd.md"
+      ],
+      "assertions": [
+        {
+          "text": "The plan shows significantly more stories than user stories (6 EA user stories should produce 10+ individual task stories, not 6)",
+          "check": "count"
+        },
+        {
+          "text": "Every story summary uses the [TEAM-SUFFIX] prefix format with a work-type suffix: [API], [UI], [DB], or [OPS]",
+          "check": "grep"
+        },
+        {
+          "text": "Every story includes a sizing estimate comment: '// est: ~N days'",
+          "check": "grep"
+        },
+        {
+          "text": "Every story description includes the three required sections: End Goal, Implementation Details, and Out of Scope",
+          "check": "llm"
+        },
+        {
+          "text": "EA blocker stories (for OTQ-3, OTQ-4, OTQ-5 dependencies) are flagged in the plan — either as dependency link notes or explicit blocker callouts",
+          "check": "llm"
+        },
+        {
+          "text": "The Epic summary follows the format 'EA: <Human-readable feature name>' (not the project slug 'audit-log-jt')",
+          "check": "grep"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Run /jira-tickets --project eo-rule-editor-jt --milestone ea\n\nJIRA MCP is NOT available. Instead of calling MCP, produce a dry-run plan showing exactly what you would create. Write the plan to docs/projects/eo-rule-editor-jt/jira-tickets-plan.md.\n\nThe plan must show:\n- Epic: summary and description\n- Each Story: summary, description (End Goal / Implementation Details / Out of Scope sections), work-type suffix, sizing estimate (// est: ~N days)\n\nJIRA config is pre-set in docs/projects/eo-rule-editor-jt/.jira-config.md (project: PROJ, prefix: WE, label: Rule_Editor_History).\nFunctional requirements are in docs/projects/eo-rule-editor-jt/functional-requirements-ea.md (status: approved).",
+      "expected_output": "jira-tickets-plan.md with one Epic and one Story per technical task (3 user stories should produce 5+ individual task stories). Each story has [UI] or [OPS] prefix (no backend), sizing estimate, structured description. External dependency on EA Audit Log team noted.",
+      "files": [
+        "docs/projects/eo-rule-editor-jt/functional-requirements-ea.md",
+        "docs/projects/eo-rule-editor-jt/.jira-config.md",
+        "docs/projects/eo-rule-editor-jt/prd.md"
+      ],
+      "assertions": [
+        {
+          "text": "The plan shows more stories than user stories (3 EA user stories should produce 4+ individual task stories)",
+          "check": "count"
+        },
+        {
+          "text": "Every story summary uses the [TEAM-SUFFIX] prefix format — primarily [UI] for this UI-only feature (no [API] or [DB] for new backend work)",
+          "check": "llm"
+        },
+        {
+          "text": "Every story includes a sizing estimate comment: '// est: ~N days'",
+          "check": "grep"
+        },
+        {
+          "text": "Every story description includes the three required sections: End Goal, Implementation Details, and Out of Scope",
+          "check": "llm"
+        },
+        {
+          "text": "The EA Audit Log team external dependency is called out in at least one story's Implementation Details or as a blocker note",
+          "check": "llm"
+        }
+      ]
+    }
+  ]
+}
