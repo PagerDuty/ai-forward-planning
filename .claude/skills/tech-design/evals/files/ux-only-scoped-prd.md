@@ -1,7 +1,7 @@
 ---
 project: eo-rule-editor-history
 created: 2026-04-10
-status: scope-finalized
+status: approved
 ---
 
 # EO Rule Editor — Inline Change History

@@ -5,7 +5,7 @@ description: "Use when a PRD is approved and scope is finalized (Scope Proposal 
 
 # Tech Design Skill
 
-Generate a deep technical spec from an approved, scope-finalized PRD. Uses GitHub MCP to scan existing architecture. Scoped to the EA/GA cut from the Scope Proposal section of `prd.md`.
+Generate a deep technical spec from an approved PRD with a finalized Scope Proposal. Uses GitHub MCP to scan existing architecture. Scoped to the EA/GA cut from the Scope Proposal section of `prd.md`.
 
 ## Arguments
 

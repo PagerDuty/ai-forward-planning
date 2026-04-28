@@ -38,20 +38,20 @@ Priority tags:
   [P1] — important; should ship soon but can be deferred
   [P2] — nice to have; cut if needed
 
-Do NOT pre-split into EA/GA — that is determined downstream by /scope-propose.
+Do NOT pre-split into EA/GA — that is determined downstream by /analyze.
 -->
 -
 
 ---
-<!-- The following sections are filled by engineering via /prd --enrich -->
+<!-- The following sections are filled by engineering via /analyze -->
 
 ## Affected Surfaces
-<!-- To be populated by: /prd --enrich --project {{project-name}} -->
+<!-- To be populated by: /analyze --project {{project-name}} -->
 <!-- Format: - <surface>: <which stories touch it> (<file found in codebase>) -->
 -
 
 ## Dependencies & Constraints
-<!-- To be populated by: /prd --enrich --project {{project-name}} -->
+<!-- To be populated by: /analyze --project {{project-name}} -->
 <!-- Format: - <finding> — <reason> (found: <file path>) -->
 -
 
@@ -71,7 +71,7 @@ Unresolved decisions. No need to answer them here — just name them.
 -
 
 ---
-<!-- The following section is appended by /scope-propose after /prd --enrich completes -->
+<!-- The following section is appended by /analyze -->
 
 ## Scope Proposal
-<!-- Run /scope-propose --project {{project-name}} to populate this section -->
+<!-- Run /analyze --project {{project-name}} to populate this section -->

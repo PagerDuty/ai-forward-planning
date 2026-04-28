@@ -1,7 +1,7 @@
 ---
 project: eo-audit-log
 created: 2026-04-01
-status: scope-finalized
+status: approved
 ---
 
 # EO Audit Log — PRD
