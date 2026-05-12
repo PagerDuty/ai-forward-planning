@@ -1,11 +1,11 @@
 ---
 name: jira-tickets
-description: "Use when functional requirements are ready and approved. Creates JIRA Epics and Stories for EA then GA sequentially using JIRA MCP."
+description: "Use when functional requirements are ready and approved, and it's time to create JIRA tickets. Creates Epics and Stories for Early Access (EA) then General Availability (GA) milestones sequentially via JIRA MCP. Handles backlog creation, story sizing, and writing issue keys back to requirements docs."
 ---
 
 # JIRA Tickets Skill
 
-Create JIRA Epics and Stories from approved functional requirements docs using JIRA MCP.
+Create JIRA Epics and Stories from approved functional requirements docs using JIRA MCP. Sizes stories to ~3 days, applies team-area prefixes, and writes issue keys back to the source files.
 
 ## Arguments
 
@@ -17,11 +17,13 @@ Create JIRA Epics and Stories from approved functional requirements docs using J
 
 **Project:** `--project <name>` or `.current-project` — stop if neither.
 
-**Precondition:** Check which func-req files exist and have `status: approved`:
-- If `functional-requirements-ea.md` exists and is approved: run EA.
-- If `functional-requirements-ga.md` exists and is approved: run GA after EA.
-- If only EA exists: run EA only, note: *"No approved GA functional requirements found — skipping GA."*
-- If neither exists: stop — *"No approved functional-requirements files found. Run `/func-req` first."*
+**Precondition:** Check `docs/projects/<name>/` for approved func-req files:
+
+| File found & `status: approved` | Action |
+|---|---|
+| EA only | Run EA; note *"No approved GA functional requirements found — skipping GA."* |
+| EA + GA | Run EA, then GA sequentially |
+| Neither | Stop — *"No approved functional-requirements files found. Run `/func-req` first."* |
 
 ---
 
@@ -49,15 +51,7 @@ Ask:
 Use JIRA MCP `createJiraIssue` with:
 - **Issue type:** Epic
 - **Summary:** `<EA|GA>: <Human-readable feature name>` — use the full feature name, not the slug
-- **Description:**
-  ```
-  <One paragraph describing the feature scope for this milestone.>
-
-  ## Resources
-  - Functional Requirements: docs/projects/<name>/functional-requirements-<milestone>.md
-  - PRD: docs/projects/<name>/prd.md
-  - Tech Design: docs/projects/<name>/tech-design.md
-  ```
+- **Description:** use the Epic template from [TEMPLATES.md](TEMPLATES.md)
 
 Record the returned Epic key (e.g., `PROJ-42`).
 
@@ -71,28 +65,7 @@ For each technical task group, create **one JIRA Story per task**. Apply sizing 
 
 **Summary format:** `[<TEAM-AREA>] <Feature>: <Specific Task>`
 
-Work-type suffixes:
-- API / backend → `<base>-API`
-- UI / frontend → `<base>-UI`
-- DB / migration → `<base>-DB`
-- Ops / launch → `<base>-OPS`
-
-**Description format:**
-```markdown
-## End Goal
-
-<One paragraph describing the concrete deliverable.>
-
-## Implementation Details
-
-<Specific technical steps: file paths, component names, API contracts, patterns to follow.>
-
-// est: ~N days
-
-## Out of Scope
-
-- <Explicit exclusions>
-```
+Work-type suffixes and description template: see [TEMPLATES.md](TEMPLATES.md).
 
 For any task flagged `⚠️ EA blocker`: add a note in Implementation Details — *"Blocked on `<team/dependency>` — link JIRA dependency manually once their ticket exists."*
 
